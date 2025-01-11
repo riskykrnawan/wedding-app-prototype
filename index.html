@@ -8,28 +8,38 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
         rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
         :root {
-            --primary-color: #FFC107;
+            --primary-color: #ffd045;
             --secondary-color: #f7fafc;
             --accent-color: #e2e8f0;
         }
 
         body {
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
             height: 100vh;
-            background-color: #fff4f3;
+            background-color: #282828;
             overflow: hidden;
+            margin: auto !important;
+            max-width: 640px !important;
         }
 
+        .mobile-container {
+            margin: auto;
+            max-width: 640px;
+        }
+        
         .section {
             height: 100vh;
             overflow: hidden;
-        }
-
-        .font-great-vibes {
-            font-family: 'Great Vibes', cursive;
         }
 
         .corner-decoration {
@@ -84,166 +94,677 @@
             transition: transform 0.5s ease-in-out;
         }
 
-        .couple-image {
-            width: 8rem;
-            height: 8rem;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            margin: 0 auto;
-        }
-
         .ornament {
             position: absolute;
             opacity: 0.3;
             font-size: 3rem;
         }
 
-        .section {
-            display: none;
-        }
-
         .section.active {
             display: block;
         }
 
-        .fab {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
+        .bottom-nav {
+            height: var(--nav-height);
+            background-color: #282828; /* Slightly transparent dark background */
+            backdrop-filter: blur(10px); /* Adds a blur effect */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section > div {
+            max-height: calc(100vh - var(--nav-height));
+            overflow-y: auto;
+        }
+
+        #cover .position-relative {
+            padding-bottom: calc(150px + var(--nav-height));
+        }
+
+        #gallery .row {
+            padding-bottom: 1rem;
+        }
+
+        .nav-pills .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .nav-pills .nav-link:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-pills .nav-link.active {
             background-color: var(--primary-color);
-            color: #fff;
+            color: white;
+        }
+
+        .particle {
+      position: absolute;
+      background: rgba(255, 215, 0, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* Opening Overlay */
+    .opening-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: all 0.8s ease-in-out;
+    }
+
+    .opening-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .wedding-content {
+      position: absolute;
+      bottom: 17%;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease-out;
+      visibility: hidden;
+    }
+
+    .show-content .wedding-content {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    .opening-content {
+      margin: 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .opening-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .bismillah {
+      font-size: 2rem;
+      color: #ffd700;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .click-text {
+      color: #fff;
+      letter-spacing: 3px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      opacity: 0.8;
+      position: relative;
+    }
+
+    .click-text::after {
+      content: '❦';
+      display: block;
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Main Section */
+    .section {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/assets/images/couple.png');
+      background-size: cover;
+      background-position: center 20%;
+      filter: brightness(0.8);
+    }
+
+    .ornament {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .ornament-tl {
+      top: 0;
+      left: 0;
+      transform: rotate(-45deg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10,50 Q50,0 90,50 Q50,100 10,50' fill='none' stroke='%23ffd700' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .ornament-br {
+      bottom: 0;
+      right: 0;
+      transform: rotate(135deg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10,50 Q50,0 90,50 Q50,100 10,50' fill='none' stroke='%23ffd700' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .vignette-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 10%,
+                rgba(0, 0, 0, 0.7) 50%,
+                rgba(0, 0, 0, 0.8) 70%,
+                rgba(0, 0, 0, 1) 100%
+            );
+    }
+
+    .wedding-content {
+      position: absolute;
+      bottom: 17%;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .show-content .wedding-content {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 1.2s ease-out;
+    }
+
+    .title-text {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .title-text::before,
+    .title-text::after {
+      content: '✦';
+      color: #ffd700;
+      margin: 0 1rem;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .couple-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+      margin: 0.5rem 0;
+      position: relative;
+    }
+
+    .couple-description {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin: 0.5rem 0;
+      font-style: italic;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .divider-line {
+      height: 1px;
+      width: 2rem;
+      background: rgba(255, 215, 0, 0.5);
+      position: relative;
+    }
+
+    .divider-line::before {
+      content: '❧';
+      position: absolute;
+      color: #ffd700;
+      font-size: 0.8rem;
+      top: -10px;
+      opacity: 0.8;
+    }
+
+    .divider-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .date-venue {
+      font-family: 'Poppins', sans-serif;
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .date-venue::before,
+    .date-venue::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border: 2px solid rgba(255, 215, 0, 0.2);
+      pointer-events: none;
+    }
+
+    .date-venue::before {
+      top: -10px;
+      left: 20%;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .date-venue::after {
+      bottom: -10px;
+      right: 20%;
+      border-left: none;
+      border-top: none;
+    }
+
+    .date {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0.5rem 0;
+      color: #ffd700;
+    }
+
+    .venue {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .countdown {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .countdown-item {
+      text-align: center;
+    }
+
+    .countdown-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffd700;
+    }
+
+    .countdown-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ffd700;
+      opacity: 0.2;
+      animation: float-up 20s linear infinite;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+        .font-great-vibes {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .wedding-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .wedding-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .couple-image {
+            width: 120px;  /* Reduced size for mobile */
+            height: 120px;
             border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 999;
-            transition: background-color 0.3s ease;
+            margin: 0 auto;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
-        .fab:hover {
-            background-color: var(--primary-color);
+        .couple-image::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
         }
 
-        .fab i {
-            pointer-events: none;
+        /* Specific couple images */
+        #ahmad-image {
+            background-image: url('assets/images/groom.jpg');
         }
+
+        #fatima-image {
+            background-image: url('assets/images/bride.jpg');
+        }
+
+        .text-primary {
+            color: #957B6B !important;
+        }
+
+        .text-muted {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        .fw-medium {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Mobile specific styles */
+        .section-title {
+            font-size: 2.5rem !important;  /* Smaller title for mobile */
+            margin-bottom: 2rem !important;
+        }
+
+        .couple-name {
+            font-size: 1.25rem !important;  /* Adjusted name size */
+            margin: 0.5rem 0;
+        }
+
+        .couple-parents {
+            font-size: 0.85rem;  /* Smaller text for parents */
+            margin-bottom: 0.2rem;
+        }
+
+        .separator {
+            font-size: 2rem !important;  /* Smaller & symbol */
+            margin: 1rem 0 !important;  /* Reduced margin */
+            padding: 0;
+        }
+
+        /* Hide desktop column gaps on mobile */
+        @media (max-width: 768px) {
+            .col-md-2 {
+                padding: 0;
+            }
+            
+            .couple-container {
+                margin-bottom: 2rem !important;
+            }
+        }
+.section-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    }
+
+    .event-card {
+      background: linear-gradient(145deg, #1a1a1a, #222);
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      border-radius: 15px;
+      padding: 2rem;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
+                  0 0 30px rgba(255, 215, 0, 0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+      backdrop-filter: blur(10px);
+    }
+
+    .event-title {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #ffd700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .event-info {
+      color: #cccccc;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      font-weight: 300;
+    }
+
+    .event-location {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ffd700, transparent);
+      margin: 1.5rem auto;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4),
+                  0 0 40px rgba(255, 215, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     </style>
 </head>
 
 <body>
-    <audio id="background-music" src="/assets/music/bunga_abadi.mp3" loop></audio>
-    <div class="container-xs p-0">
-        <div id="fab-music" class="fab" onclick="toggleMusic()">
-            <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#ffffff">
-                <path
-                    d="M747.69-481q0-82.23-44.38-149.96-44.39-67.73-119.16-100.96-8.07-3.93-12-11.12-3.92-7.19-.46-14.5 3.69-8.31 12.66-10.69 8.96-2.39 18.03 1.54Q686.31-727.54 737-650.96q50.69 76.58 50.69 169.96 0 93.38-50.69 169.96-50.69 76.58-134.62 115.73-9.07 3.93-18.03 1.54-8.97-2.38-12.66-10.69-3.46-7.31.46-14.5 3.93-7.19 12-11.12 74.77-33.23 119.16-100.96 44.38-67.73 44.38-149.96Zm-438.46 81H204.62q-13.93 0-23.12-9.19-9.19-9.19-9.19-23.12v-95.38q0-13.93 9.19-23.12 9.19-9.19 23.12-9.19h104.61l107.39-107.39q9.76-9.76 22.73-4.65 12.96 5.12 12.96 19.04v346q0 13.92-12.96 19.04-12.97 5.11-22.73-4.65L309.23-400Zm323.08-80q0 32.77-12.08 62.19-12.08 29.43-33.85 51.12-6.92 5.23-15.11 1.65-8.19-3.58-8.19-12.5v-206.92q0-8.92 8.19-12.5t15.11 1.65q21.77 21.93 33.85 52.23 12.08 30.31 12.08 63.08Z" />
-            </svg>
-        </div>
-
-        <section id="cover" class="section active position-relative mb-5" style="min-height: 100vh;">
-            <!-- Background image with vignette effect -->
-            <div class="position-absolute start-0 w-100 h-100" style="top: -10%;">
-                <!-- Replace the src with your actual image path -->
-                <img src="assets/images/couple.png" alt="Wedding Background" class="w-100 h-100"
-                    style="object-fit: cover; object-position: center 20%;">
+    <div class="mobile-container p-0 relative">
+        <!-- Opening Overlay -->
+        <div class="opening-overlay" id="openingOverlay">
+            <div class="opening-content">
+                <div class="bismillah">﷽</div>
+                <div class="opening-title">Wedding Invitation</div>
+                <p class="click-text">Click to Open</p>
             </div>
-
+        </div>
         
-            <!-- Vignette overlay yang menutupi seluruh konten -->
-            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0) 10%,      /* Bagian atas terang */
-                rgba(0, 0, 0, 0.7) 50%,    /* Mulai agak gelap */
-                rgba(0, 0, 0, 0.8) 70%,    /* Lebih gelap ke bawah */
-                rgba(0, 0, 0, 1) 100%      /* Bagian paling bawah sangat gelap */
-            );"></div>
-
+        <!-- Main Content -->
+        <section class="section" id="mainContent">
+            <div class="background-image"></div>
+            <div class="vignette-overlay"></div>
+            <div class="ornament ornament-tl"></div>
+            <div class="ornament ornament-br"></div>
+            <div class="floating-hearts" id="heartsContainer"></div>
         
-            <!-- Content -->
-            <div class="position-relative h-100 d-flex flex-column align-items-center justify-content-end text-center text-white"
-                style="padding-bottom: 150px;">
-                <p class="text-uppercase mb-2"
-                    style="font-family: 'Poppins', sans-serif; letter-spacing: 2px; font-size: 0.85rem;">
-                    The Wedding Of
-                </p>
+            <div class="wedding-content">
+                <p class="title-text">The Wedding Of</p>
         
-                <div class="mb-3">
-                    <h1 class="font-great-vibes display-1 mb-2 text-warning">Ahmad</h1>
-                    <div class="d-flex align-items-center justify-content-center gap-3">
-                        <div class="opacity-50" style="height: 1px; width: 2rem; background: white;"></div>
-                        <span class="font-great-vibes h2">&</span>
-                        <div class="opacity-50" style="height: 1px; width: 2rem; background: white;"></div>
-                    </div>
-                    <h1 class="font-great-vibes display-1 mt-2 text-warning">Fatima</h1>
+                <h1 class="couple-names">Ahmad</h1>
+                <p class="couple-description">Putra dari Bpk. Abdul & Ibu Aminah</p>
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <span class="divider-text">&</span>
+                    <div class="divider-line"></div>
+                </div>
+                <h1 class="couple-names">Fatima</h1>
+                <p class="couple-description">Putri dari Bpk. Muhammad & Ibu Khadijah</p>
+        
+                <div class="date-venue">
+                    <p class="venue">Minggu</p>
+                    <p class="date">20.02.2025</p>
+                    <div class="divider-line" style="margin: 1rem auto"></div>
+                    <p class="venue">at Grand Ballroom</p>
+                    <p class="venue">Hotel Mulia Jakarta</p>
                 </div>
         
-                <div style="font-family: 'Poppins', sans-serif;">
-                    <p style="font-size: 0.9rem; margin-bottom: 0.3rem;">Minggu</p>
-                    <p class="h5 mb-2">20.02.2025</p>
-                    <div class="opacity-25 mx-auto my-2" style="height: 1px; width: 4rem; background: white;"></div>
-                    <p style="font-size: 0.9rem; margin-bottom: 0.3rem;">at Grand Ballroom</p>
-                    <p style="font-size: 0.9rem;">Hotel Mulia Jakarta</p>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
                 </div>
             </div>
         </section>
+
         <!-- Couple Section -->
-        <section id="couple" class="section bg-white">
-            <div class="h-100 d-flex align-items-center justify-content-center p-4">
-                <div class="text-center">
-                    <h2 class="font-great-vibes display-5 text-primary mb-5">The Happy Couple</h2>
-
-                    <div class="mb-5">
-                        <div class="couple-image mb-3"></div>
-                        <h3 class="h4 fw-medium">Ahmad</h3>
-                        <p class="small text-muted">Putra dari Bpk. & Ibu Abdullah</p>
-                    </div>
-
-                    <div class="font-great-vibes display-4 text-primary my-4">&</div>
-
-                    <div class="mt-5">
-                        <div class="couple-image mb-3"></div>
-                        <h3 class="h4 fw-medium">Fatima</h3>
-                        <p class="small text-muted">Putri dari Bpk. & Ibu Rahman</p>
+        <section id="couple" class="section py-5 bg-gray relative">
+            <div class="container">
+                <div class="position-absolute end-0 top-50 translate-middle-y pattern-overlay mobile-container">
+                    <img src="assets/images/pattern.png" width="120" height="260" class="opacity-25">
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <h2 class="font-great-vibes text-primary section-title">
+                            The Happy Couple
+                        </h2>
+        
+                        <div class="couple-container my-4">
+                            <div id="ahmad-image" class="couple-image mb-3"></div>
+                            <h3 class="couple-name fw-medium">Ahmad</h3>
+                            <p class="couple-parents text-muted mb-1">Putra dari</p>
+                            <p class="couple-parents text-muted">Bpk. & Ibu Abdullah</p>
+                        </div>
+        
+                        <div class="font-great-vibes text-warning separator">&</div>
+        
+                        <div class="couple-container my-4">
+                            <div id="fatima-image" class="couple-image mb-3"></div>
+                            <h3 class="couple-name fw-medium">Fatima</h3>
+                            <p class="couple-parents text-muted mb-1">Putri dari</p>
+                            <p class="couple-parents text-muted">Bpk. & Ibu Rahman</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Event Section -->
-        <section id="event" class="section bg-light">
-            <div class="h-100 d-flex align-items-center justify-content-center p-4">
-                <div class="text-center">
-                    <h2 class="font-great-vibes display-5 text-primary mb-5">Wedding Ceremony</h2>
-
-                    <div class="mb-5">
-                        <h3 class="h4 fw-medium">Akad Nikah</h3>
-                        <p class="small text-muted mb-1">Minggu, 20 Februari 2025</p>
-                        <p class="small text-muted mb-3">09:00 WIB</p>
-                        <p class="small text-muted mb-1">Masjid Al-Hikmah</p>
-                        <p class="small text-muted">Jl. Merdeka No. 123, Jakarta</p>
-                    </div>
-
-                    <div class="mt-5">
-                        <h3 class="h4 fw-medium">Resepsi</h3>
-                        <p class="small text-muted mb-1">Minggu, 20 Februari 2025</p>
-                        <p class="small text-muted mb-3">11:00 - 14:00 WIB</p>
-                        <p class="small text-muted mb-1">Grand Ballroom Hotel Mulia</p>
-                        <p class="small text-muted">Jl. Kemuliaan No. 456, Jakarta</p>
-                    </div>
+        <section id="event" class="section py-5 bg-gray relative">
+            <div class="container">
+                <h2 class="text-center m-auto section-title animate__animated animate__fadeIn">
+                    Wedding Ceremony
+                </h2>
+        
+                <div class="event-card" style="animation-delay: 0.2s">
+                    <h3 class="event-title">Akad Nikah</h3>
+                    <div class="divider"></div>
+                    <p class="event-info">Minggu, 20 Feb 2025 | 09:00 WIB</p>
+                    <p class="event-info"></p>
+                    <p class="event-location">Masjid Al-Hikmah</p>
+                    <p class="event-info">Jl. Merdeka No. 123, Jakarta</p>
+                </div>
+        
+                <div class="event-card" style="animation-delay: 0.4s">
+                    <h3 class="event-title">Resepsi</h3>
+                    <div class="divider"></div>
+                    <p class="event-info">Minggu, 20 Feb 2025 | 11:00 - 14:00 WIB</p>
+                    <p class="event-location">Grand Ballroom Hotel Mulia</p>
+                    <p class="event-info">Jl. Kemuliaan No. 456, Jakarta</p>
                 </div>
             </div>
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="section bg-white">
+        <section id="gallery" class="section py-5 bg-gray relative">
             <div class="h-100 d-flex align-items-center justify-content-center p-4">
                 <div class="text-center">
-                    <h2 class="font-great-vibes display-5 text-primary mb-5">Our Moments</h2>
+                    <h2 class="text-center m-auto section-title animate__animated animate__fadeIn">
+                        Our Moments
+                    </h2>
                     <div class="row g-3">
                         <div class="col-6">
                             <div class="ratio ratio-1x1 bg-light rounded"></div>
@@ -263,26 +784,28 @@
         </section>
 
         <!-- Navigation -->
-        <nav class="container-xs fixed-bottom bg-dark py-3">
-            <ul class="nav nav-pills nav-fill justify-content-center max-w-md mx-auto px-4">
-                <li class="nav-item">
+        <nav id="bottom-navbar" class="mobile-container fixed-bottom bottom-nav py-2 d-none">
+            <ul class="nav nav-pills nav-fill justify-content-center max-w-md mx-auto" style="width: 400px;">
+                <li class="nav-item mx-2" style="width: 60px;">
                     <a class="nav-link active" href="#cover" data-section="cover">
                         <div class="d-flex flex-column align-items-center">
                             <span class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#ffffff">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"
+                                    fill="#ffffff">
                                     <path
                                         d="M200-200v-347.69q0-15.35 6.87-29.08 6.86-13.73 18.98-22.61l215.38-163.08q16.91-12.92 38.65-12.92t38.89 12.92l215.38 163.08q12.12 8.88 18.98 22.61 6.87 13.73 6.87 29.08V-200q0 16.08-11.96 28.04T720-160H584.62q-13.74 0-23.02-9.29-9.29-9.29-9.29-23.02v-190.77q0-13.73-9.29-23.02-9.29-9.28-23.02-9.28h-80q-13.73 0-23.02 9.28-9.29 9.29-9.29 23.02v190.77q0 13.73-9.29 23.02-9.28 9.29-23.02 9.29H240q-16.08 0-28.04-11.96T200-200Z" />
                                 </svg>
-                        </span>
+                            </span>
                             <span class="small">Home</span>
                         </div>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2" style="width: 60px;">
                     <a class="nav-link" href="#couple" data-section="couple">
                         <div class="d-flex flex-column align-items-center">
                             <span class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#ffffff">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"
+                                    fill="#ffffff">
                                     <path
                                         d="M479.23-196.23q-11.69 0-23.11-4.23-11.43-4.23-20.12-12.92l-45.92-41.47q-106.77-97-188.43-188.65Q120-535.15 120-634q0-76.31 51.85-128.15Q223.69-814 300-814q43.77 0 91.15 22.12 47.39 22.11 88.85 83.42 41.46-61.31 88.85-83.42Q616.23-814 660-814q76.31 0 128.15 51.85Q840-710.31 840-634q0 101.15-85 194.46T568.92-254.62l-45.69 41.24q-8.69 8.69-20.5 12.92t-23.5 4.23Z" />
                                 </svg>
@@ -291,11 +814,12 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2" style="width: 60px;">
                     <a class="nav-link" href="#event" data-section="event">
                         <div class="d-flex flex-column align-items-center">
                             <span class="fs-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#ffffff">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"
+                                    fill="#ffffff">
                                     <path
                                         d="M224.62-120q-27.62 0-46.12-18.5Q160-157 160-184.62v-510.76q0-27.62 18.5-46.12Q197-760 224.62-760h70.76v-67.69q0-9.31 6.12-15.43 6.12-6.11 15.42-6.11 9.31 0 15.43 6.11 6.11 6.12 6.11 15.43V-760h286.16v-69.23q0-8.54 5.73-14.27t14.27-5.73q8.53 0 14.26 5.73 5.74 5.73 5.74 14.27V-760h70.76q27.62 0 46.12 18.5Q800-723 800-695.38v510.76q0 27.62-18.5 46.12Q763-120 735.38-120H224.62Zm0-40h510.76q9.24 0 16.93-7.69 7.69-7.69 7.69-16.93v-350.76H200v350.76q0 9.24 7.69 16.93 7.69 7.69 16.93 7.69ZM480-393.85q-12.38 0-21.58-9.19-9.19-9.19-9.19-21.58 0-12.38 9.19-21.57 9.2-9.19 21.58-9.19 12.38 0 21.58 9.19 9.19 9.19 9.19 21.57 0 12.39-9.19 21.58-9.2 9.19-21.58 9.19Zm-160 0q-12.38 0-21.58-9.19-9.19-9.19-9.19-21.58 0-12.38 9.19-21.57 9.2-9.19 21.58-9.19 12.38 0 21.58 9.19 9.19 9.19 9.19 21.57 0 12.39-9.19 21.58-9.2 9.19-21.58 9.19Zm320 0q-12.38 0-21.58-9.19-9.19-9.19-9.19-21.58 0-12.38 9.19-21.57 9.2-9.19 21.58-9.19 12.38 0 21.58 9.19 9.19 9.19 9.19 21.57 0 12.39-9.19 21.58-9.2 9.19-21.58 9.19ZM480-240q-12.38 0-21.58-9.19-9.19-9.19-9.19-21.58 0-12.38 9.19-21.58 9.2-9.19 21.58-9.19 12.38 0 21.58 9.19 9.19 9.2 9.19 21.58 0 12.39-9.19 21.58Q492.38-240 480-240Zm-160 0q-12.38 0-21.58-9.19-9.19-9.19-9.19-21.58 0-12.38 9.19-21.58 9.2-9.19 21.58-9.19 12.38 0 21.58 9.19 9.19 9.2 9.19 21.58 0 12.39-9.19 21.58Q332.38-240 320-240Zm320 0q-12.38 0-21.58-9.19-9.19-9.19-9.19-21.58 0-12.38 9.19-21.58 9.2-9.19 21.58-9.19 12.38 0 21.58 9.19 9.19 9.2 9.19 21.58 0 12.39-9.19 21.58Q652.38-240 640-240Z" />
                                 </svg>
@@ -304,15 +828,16 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2" style="width: 60px;">
                     <a class="nav-link" href="#gallery" data-section="gallery">
                         <div class="d-flex flex-column align-items-center">
                             <span class="fs-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#ffffff">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"
+                                    fill="#ffffff">
                                     <path
                                         d="M366.15-412.31h347.7L603.54-558.46l-98.16 123.08-63.53-75.39-75.7 98.46ZM324.62-280q-27.62 0-46.12-18.5Q260-317 260-344.62v-430.76q0-27.62 18.5-46.12Q297-840 324.62-840h430.76q27.62 0 46.12 18.5Q820-803 820-775.38v430.76q0 27.62-18.5 46.12Q783-280 755.38-280H324.62Zm0-40h430.76q9.24 0 16.93-7.69 7.69-7.69 7.69-16.93v-430.76q0-9.24-7.69-16.93-7.69-7.69-16.93-7.69H324.62q-9.24 0-16.93 7.69-7.69 7.69-7.69 16.93v430.76q0 9.24 7.69 16.93 7.69 7.69 16.93 7.69Zm-120 160q-27.62 0-46.12-18.5Q140-197 140-224.61v-470.77h40v470.77q0 9.23 7.69 16.92 7.69 7.69 16.93 7.69h470.76v40H204.62Zm120-640h430.76q9.24 0 16.93 7.69 7.69 7.69 7.69 16.93v430.76q0 9.24-7.69 16.93-7.69 7.69-16.93 7.69H324.62q-9.24 0-16.93-7.69-7.69-7.69-7.69-16.93v-430.76q0-9.24 7.69-16.93 7.69-7.69 16.93-7.69Z" />
                                 </svg>
-                        </span>
+                            </span>
                             <span class="small">Gallery</span>
                         </div>
                     </a>
@@ -323,44 +848,118 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        const audio = document.getElementById('background-music');
-        let isPlaying = false;
+        document.addEventListener('DOMContentLoaded', function () {
+            const overlay = document.getElementById('openingOverlay');
+            const mainContent = document.getElementById('mainContent');
 
-        // Auto play music when page loads
-        window.addEventListener('load', () => {
-            audio.play().then(() => {
-                isPlaying = true;
-                updateFabIcon();
-            }).catch(error => {
-                console.log('Auto-play blocked by browser.');
+            // Add floating hearts
+            const heartsContainer = document.getElementById('heartsContainer');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fas fa-heart heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 20 + 's';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heartsContainer.appendChild(heart);
+            }
+
+            // Add particles
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                document.body.appendChild(particle);
+            }
+
+            // Countdown Timer
+            const weddingDate = new Date('2025-02-20T11:00:00').getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                }
+            }
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // Opening overlay click handler
+            overlay.addEventListener('click', function () {
+                overlay.classList.add('fade-out');
+                mainContent.classList.add('show-content');
+
+                // Add entrance animations for elements
+                const elements = document.querySelectorAll('.couple-names, .couple-description, .date-venue, .countdown');
+                elements.forEach((element, index) => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        element.style.transition = 'all 0.8s ease-out';
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 500 + (index * 200));
+                });
+            });
+
+            // Parallax effect for background
+            let lastScrollTop = 0;
+            document.addEventListener('scroll', function () {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+                const backgroundImage = document.querySelector('.background-image');
+                const direction = st > lastScrollTop ? 'down' : 'up';
+
+                if (backgroundImage) {
+                    const speed = 0.5;
+                    const yPos = (st * speed);
+                    backgroundImage.style.transform = `translateY(${yPos}px)`;
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }, false);
+
+            // Add smooth scroll for mobile devices
+            document.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+            }, { passive: false });
+
+
+            // Optional: Add loading animation
+            window.addEventListener('load', function () {
+                const loader = document.createElement('div');
+                loader.className = 'loader';
+                document.body.appendChild(loader);
+
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.remove();
+                    }, 500);
+                }, 1000);
             });
         });
-
-        // Toggle music play/pause
-        function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-            } else {
-                audio.play();
-            }
-            isPlaying = !isPlaying;
-            updateFabIcon();
-        }
-
-        // Update FAB icon based on music state
-        function updateFabIcon() {
-            const fabIcon = document.querySelector('#fab-music i');
-            if (isPlaying) {
-                fabIcon.classList.remove('fa-music');
-                fabIcon.classList.add('fa-pause');
-            } else {
-                fabIcon.classList.remove('fa-pause');
-                fabIcon.classList.add('fa-music');
-            }
-        }
     </script>
-
-    <script>
+        <script>
         document.addEventListener('DOMContentLoaded', function () {
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('.section');
@@ -410,6 +1009,278 @@
                 }
             });
         });
+
+        // Fungsi untuk meminta fullscreen
+            function requestFullscreen() {
+                const element = document.documentElement;
+                const requestMethod = element.requestFullscreen ||
+                    element.webkitRequestFullscreen ||
+                    element.mozRequestFullScreen ||
+                    element.msRequestFullscreen;
+                const bottomNavbar = document.getElementById('bottom-navbar');
+
+                bottomNavbar.classList.remove('d-none')
+                if (requestMethod) {
+                    requestMethod.call(element);
+                }
+            }
+
+            // Style untuk button fullscreen
+            const buttonStyles = `position: absolute;top: 16px;right: 16px;z-index: 9999;background: rgba(255, 255, 255, 0.9);border: none;border-radius: 50%;width: 48px;height: 48px;cursor: pointer;display: flex;align-items: center;justify-content: center;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);transition: all 0.3s ease;backdrop-filter: blur(10px);-webkit-backdrop-filter: blur(10px);`;
+
+            // Style untuk hover state
+            const hoverStyles = `transform: scale(1.1);box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);background: rgba(255, 255, 255, 1);`;
+
+            document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('click', function firstClick() {
+                    requestFullscreen();
+                    document.removeEventListener('click', firstClick);
+                }, { once: true });
+            });
+
+            document.addEventListener('fullscreenchange', function () {
+                if (!document.fullscreenElement) {
+                    const button = document.createElement('button');
+                    button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFC107"><path d="M200-200h116.92q8.5 0 14.25 5.76t5.75 14.27q0 8.51-5.75 14.24T316.92-160H192.31q-13.73 0-23.02-9.29T160-192.31v-124.61q0-8.5 5.76-14.25t14.27-5.75q8.51 0 14.24 5.75t5.73 14.25V-200Zm560.77 0v-116.92q0-8.5 5.76-14.25 5.75-5.75 14.27-5.75 8.51 0 14.24 5.75t5.73 14.25v124.61q0 13.73-9.29 23.02T768.46-160H643.85q-8.5 0-14.25-5.76t-5.75-14.27q0-8.51 5.75-14.24t14.25-5.73h116.92ZM200-760v116.92q0 8.5-5.76 14.25t-14.27 5.75q-8.51 0-14.24-5.75T160-643.08v-124.61q0-13.73 9.29-23.02t23.02-9.29h124.61q8.5 0 14.25 5.76t5.75 14.27q0 8.51-5.75 14.24T316.92-760H200Zm560.77 0H643.85q-8.5 0-14.25-5.76t-5.75-14.27q0-8.51 5.75-14.24t14.25-5.73h124.61q13.73 0 23.02 9.29t9.29 23.02v124.61q0 8.5-5.76 14.25t-14.27 5.75q-8.51 0-14.24-5.75t-5.73-14.25V-760Z" /></svg>';
+                    button.style.cssText = buttonStyles;
+
+                    // Tambahkan efek hover
+                    button.onmouseenter = () => {
+                        button.style.cssText = buttonStyles + hoverStyles;
+                    };
+                    button.onmouseleave = () => {
+                        button.style.cssText = buttonStyles;
+                    };
+
+                    // Tambahkan efek klik
+                    button.onmousedown = () => {
+                        button.style.transform = 'scale(0.95)';
+                    };
+                    button.onmouseup = () => {
+                        button.style.transform = 'scale(1)';
+                    };
+
+                    button.onclick = requestFullscreen;
+
+                    // Hapus button yang sudah ada jika ada
+                    const existingButton = document.querySelector('.fullscreen-button');
+                    if (existingButton) {
+                        existingButton.remove();
+                    }
+
+                    button.className = 'fullscreen-button';
+                    document.body.appendChild(button);
+
+                    // Tambahkan animasi muncul
+                    button.animate([
+                        { opacity: 0, transform: 'scale(0.8)' },
+                        { opacity: 1, transform: 'scale(1)' }
+                    ], {
+                        duration: 300,
+                        easing: 'ease-out'
+                    });
+                } else {
+                    const button = document.querySelector('.fullscreen-button');
+                    if (button) {
+                        button.remove();
+                    }
+                }
+            });
+
+            document.getElementById('openingOverlay').addEventListener('click', async function () {
+                    try {
+                        // Request fullscreen
+                        const elem = document.documentElement;
+                        if (elem.requestFullscreen) {
+                            await elem.requestFullscreen();
+                        }
+
+                        // Hide overlay
+                        this.classList.add('hidden');
+
+                        // Show content with delay
+                        setTimeout(() => {
+                            document.querySelector('.wedding-content').classList.add('visible');
+                        }, 1000);
+                    } catch (err) {
+                        console.error('Error attempting to enable fullscreen:', err);
+                    }
+                });
+
+           document.addEventListener('DOMContentLoaded', function () {
+                // Elements
+                const overlay = document.getElementById('openingOverlay');
+                const mainContent = document.getElementById('mainContent');
+                const navbar = document.getElementById('bottom-navbar');
+                const navLinks = document.querySelectorAll('#bottom-navbar .nav-link');
+
+                // Section mappings
+                const sectionMappings = {
+                    'cover': 'mainContent',
+                    'couple': 'couple',
+                    'event': 'event',
+                    'gallery': 'gallery'
+                };
+
+                // Get all sections
+                const sections = Object.values(sectionMappings).map(id => document.getElementById(id));
+
+                // Floating hearts
+                const heartsContainer = document.getElementById('heartsContainer');
+                for (let i = 0; i < 20; i++) {
+                    const heart = document.createElement('i');
+                    heart.className = 'fas fa-heart heart';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDelay = Math.random() * 20 + 's';
+                    heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                    heartsContainer.appendChild(heart);
+                }
+
+                // Countdown Timer
+                const weddingDate = new Date('2025-02-20T11:00:00').getTime();
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const distance = weddingDate - now;
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById('days').textContent = String(days).padStart(2, '0');
+                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                }
+                const countdownInterval = setInterval(updateCountdown, 1000);
+                updateCountdown();
+
+                // Scroll handling
+                let isScrolling = false;
+                let currentSection = 0;
+                let touchStartY = 0;
+
+                function getCurrentSectionIndex() {
+                    const scrollPosition = window.scrollY + (window.innerHeight / 3);
+
+                    for (let i = 0; i < sections.length; i++) {
+                        const section = sections[i];
+                        if (!section) continue;
+
+                        const sectionTop = section.offsetTop;
+                        const sectionBottom = sectionTop + section.offsetHeight;
+
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            return i;
+                        }
+                    }
+                    return 0;
+                }
+
+                function updateActiveNavLink(index) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index]?.classList.add('active');
+                }
+
+                function scrollToSection(index) {
+                    if (index < 0 || index >= sections.length) return;
+
+                    isScrolling = true;
+                    currentSection = index;
+
+                    const targetSection = sections[index];
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+
+                    updateActiveNavLink(index);
+
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 1000);
+                }
+
+                // Event Listeners
+                window.addEventListener('scroll', () => {
+                    if (!isScrolling) {
+                        currentSection = getCurrentSectionIndex();
+                        updateActiveNavLink(currentSection);
+                    }
+                }, { passive: true });
+
+                window.addEventListener('wheel', (e) => {
+                    if (isScrolling) return;
+
+                    if (e.deltaY > 0 && currentSection < sections.length - 1) {
+                        scrollToSection(currentSection + 1);
+                    } else if (e.deltaY < 0 && currentSection > 0) {
+                        scrollToSection(currentSection - 1);
+                    }
+                }, { passive: true });
+
+                // Touch events
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+
+                document.addEventListener('touchend', (e) => {
+                    if (isScrolling) return;
+
+                    const touchEndY = e.changedTouches[0].clientY;
+                    const diff = touchStartY - touchEndY;
+
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0 && currentSection < sections.length - 1) {
+                            scrollToSection(currentSection + 1);
+                        } else if (diff < 0 && currentSection > 0) {
+                            scrollToSection(currentSection - 1);
+                        }
+                    }
+                }, { passive: true });
+
+                // Navigation click events
+                navLinks.forEach((link, index) => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        scrollToSection(index);
+                    });
+                });
+
+                // Opening overlay handler
+                overlay.addEventListener('click', async function () {
+                    try {
+                        // Request fullscreen
+                        const elem = document.documentElement;
+                        if (elem.requestFullscreen) {
+                            await elem.requestFullscreen();
+                        }
+
+                        // Hide overlay and show content
+                        this.classList.add('fade-out');
+                        mainContent.classList.add('show-content');
+
+                        // Animate elements
+                        const elements = document.querySelectorAll('.couple-names, .couple-description, .date-venue, .countdown');
+                        elements.forEach((element, index) => {
+                            element.style.opacity = '0';
+                            element.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                element.style.transition = 'all 0.8s ease-out';
+                                element.style.opacity = '1';
+                                element.style.transform = 'translateY(0)';
+                            }, 500 + (index * 200));
+                        });
+                    } catch (err) {
+                        console.error('Error:', err);
+                    }
+                });
+
+                // Initialize
+                updateActiveNavLink(getCurrentSectionIndex());
+            });
     </script>
 </body>
 
